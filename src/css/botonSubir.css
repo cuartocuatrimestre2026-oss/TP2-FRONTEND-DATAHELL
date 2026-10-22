@@ -1,0 +1,45 @@
+.btn-subir {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--accent-orange);
+  color: var(--white);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(198, 73, 15, 0.4);
+  z-index: 999;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-subir.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.btn-subir:hover {
+  background-color: rgba(198, 73, 15, 0.15);
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(198, 73, 15, 0.6);
+}
+
+@media (max-width: 768px) {
+  .btn-subir {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 42px;
+    height: 42px;
+  }
+}
