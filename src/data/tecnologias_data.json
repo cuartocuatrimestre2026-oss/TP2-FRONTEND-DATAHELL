@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "nombre": "HTML5",
+    "categoria": "Frontend",
+    "descripcion": "Estándar de maquetación semántica y estructuración de contenido web con accesibilidad nativa.",
+    "icono": "LayoutTemplate",
+    "version": "W3C Living Standard",
+    "licencia": "Estándar Abierto (W3C)",
+    "uso": "Base estructural semántica para todas las pantallas y formularios de la aplicación."
+  },
+  {
+    "id": 2,
+    "nombre": "CSS3",
+    "categoria": "Frontend",
+    "descripcion": "Hojas de estilo en cascada para diseño adaptativo mediante Flexbox, Grid y variables CSS nativas.",
+    "icono": "PenTool",
+    "version": "CSS3 / W3C",
+    "licencia": "Estándar Abierto (W3C)",
+    "uso": "Arquitectura de estilos modulares, paleta tech-noir y animaciones fluidas."
+  },
+  {
+    "id": 3,
+    "nombre": "JavaScript (ES6+)",
+    "categoria": "Frontend",
+    "descripcion": "Lenguaje de programación de alto nivel para manipulación reactiva del DOM y lógica asíncrona.",
+    "icono": "Code",
+    "version": "ECMAScript 2024",
+    "licencia": "Estándar Abierto (ECMA)",
+    "uso": "Lógica interactiva de clientes, promesas, llamadas a APIs REST y gestión de eventos."
+  },
+  {
+    "id": 4,
+    "nombre": "React",
+    "categoria": "Frontend",
+    "descripcion": "Biblioteca declarativa basada en componentes y Virtual DOM para construir interfaces SPA escalables.",
+    "icono": "Code",
+    "version": "v18.3.1",
+    "licencia": "Open Source (MIT)",
+    "uso": "Núcleo orquestador de componentes, hooks de estado (useState, useEffect) y UI modular."
+  },
+  {
+    "id": 5,
+    "nombre": "Vite",
+    "categoria": "Frontend",
+    "descripcion": "Herramienta de construcción frontend ultrarrápida impulsada por módulos ES nativos y HMR instantáneo.",
+    "icono": "Box",
+    "version": "v8.3.4",
+    "licencia": "Open Source (MIT)",
+    "uso": "Entorno de desarrollo local, optimización de bundles y compilación para producción."
+  },
+  {
+    "id": 6,
+    "nombre": "Node.js",
+    "categoria": "Backend",
+    "descripcion": "Entorno de ejecución de JavaScript del lado del servidor construido sobre el motor V8 de Chromium.",
+    "icono": "Server",
+    "version": "v20.x LTS",
+    "licencia": "Open Source (MIT)",
+    "uso": "Gestión de dependencias del ecosistema npm y ejecución de scripts de automatización."
+  },
+  {
+    "id": 7,
+    "nombre": "C#",
+    "categoria": "Backend",
+    "descripcion": "Lenguaje multiparadigma fuertemente tipado orientado a objetos para arquitecturas empresariales robustas.",
+    "icono": "TerminalSquare",
+    "version": "C# 12",
+    "licencia": "Open Source (MIT)",
+    "uso": "Desarrollo de servicios backend de alta performance y modelos orientados a objetos."
+  },
+  {
+    "id": 8,
+    "nombre": ".NET",
+    "categoria": "Backend",
+    "descripcion": "Plataforma unificada de desarrollo de Microsoft para aplicaciones web, APIs y microservicios multiplataforma.",
+    "icono": "Server",
+    "version": ".NET 8.0",
+    "licencia": "Open Source (MIT)",
+    "uso": "Construcción de Web APIs RESTful seguras con inyección de dependencias nativa."
+  },
+  {
+    "id": 9,
+    "nombre": "Java",
+    "categoria": "Backend",
+    "descripcion": "Lenguaje portable y robusto basado en clases diseñado para aplicaciones empresariales de misión crítica.",
+    "icono": "TerminalSquare",
+    "version": "Java 21 LTS",
+    "licencia": "GPLv2 / Comercial",
+    "uso": "Servicios distribuidos de backend y arquitectura de procesamiento concurrente."
+  },
+  {
+    "id": 10,
+    "nombre": "Spring Boot",
+    "categoria": "Backend",
+    "descripcion": "Framework empresarial de Java que simplifica la configuración y despliegue de microservicios productivos.",
+    "icono": "Server",
+    "version": "v3.3.x",
+    "licencia": "Open Source (Apache 2.0)",
+    "uso": "Creación ágil de APIs REST seguras con auto-configuración y persistencia JPA."
+  },
+  {
+    "id": 11,
+    "nombre": "Python",
+    "categoria": "Backend",
+    "descripcion": "Lenguaje versátil e interpretado utilizado en scripting, automatización de tareas y análisis de datos.",
+    "icono": "TerminalSquare",
+    "version": "v3.12+",
+    "licencia": "PSF License",
+    "uso": "Scripts de procesamiento de datos, pruebas de integración y validación algorítmica."
+  },
+  {
+    "id": 12,
+    "nombre": "Kotlin",
+    "categoria": "Mobile",
+    "descripcion": "Lenguaje moderno y conciso adoptado oficialmente por Google para el desarrollo móvil nativo en Android.",
+    "icono": "Smartphone",
+    "version": "v2.0",
+    "licencia": "Open Source (Apache 2.0)",
+    "uso": "Desarrollo de aplicaciones móviles seguras y con interoperabilidad completa con Java."
+  },
+  {
+    "id": 13,
+    "nombre": "XML Layouts",
+    "categoria": "Mobile",
+    "descripcion": "Lenguaje de marcado estructurado para definición de vistas, jerarquías y recursos gráficos en Android.",
+    "icono": "LayoutTemplate",
+    "version": "XML 1.0",
+    "licencia": "Estándar Abierto (W3C)",
+    "uso": "Estructuración visual de actividades y fragmentos en ecosistemas móviles nativos."
+  },
+  {
+    "id": 14,
+    "nombre": "MySQL",
+    "categoria": "Base de Datos",
+    "descripcion": "Sistema gestor de bases de datos relacional para almacenamiento ACID y consultas SQL optimizadas.",
+    "icono": "Database",
+    "version": "v8.0",
+    "licencia": "GPL / Comercial",
+    "uso": "Almacenamiento persistente estructurado con integridad referencial y claves foráneas."
+  },
+  {
+    "id": 15,
+    "nombre": "MongoDB",
+    "categoria": "Base de Datos",
+    "descripcion": "Base de datos NoSQL líder orientada a documentos flexibles JSON/BSON de alta escalabilidad horizontal.",
+    "icono": "Database",
+    "version": "v7.0",
+    "licencia": "SSPL",
+    "uso": "Persistencia de colecciones dinámicas y esquemas no estructurados de lectura ágil."
+  },
+  {
+    "id": 16,
+    "nombre": "Figma",
+    "categoria": "Diseño & UX",
+    "descripcion": "Herramienta colaborativa de diseño en la nube para prototipado interactivo y sistemas de diseño (Design Systems).",
+    "icono": "PenTool",
+    "version": "Cloud Web",
+    "licencia": "SaaS / Propietaria",
+    "uso": "Definición del wireframe inicial, paleta tech-noir y pruebas de usabilidad previas al código."
+  },
+  {
+    "id": 17,
+    "nombre": "Postman",
+    "categoria": "QA & Testing",
+    "descripcion": "Plataforma líder para diseño, pruebas automatizadas, monitoreo y documentación exhaustiva de APIs REST.",
+    "icono": "Globe",
+    "version": "v11.x",
+    "licencia": "Freemium / Comercial",
+    "uso": "Pruebas de endpoints HTTP, verificación de payloads JSON y validación de códigos de estado."
+  },
+  {
+    "id": 18,
+    "nombre": "Selenium WebDriver",
+    "categoria": "QA & Testing",
+    "descripcion": "Suite para automatización de navegadores que ejecuta pruebas funcionales de extremo a extremo (E2E).",
+    "icono": "Globe",
+    "version": "v4.20+",
+    "licencia": "Open Source (Apache 2.0)",
+    "uso": "Automatización de flujos de usuario, validación de formularios y regresiones visuales."
+  },
+  {
+    "id": 19,
+    "nombre": "Pytest",
+    "categoria": "QA & Testing",
+    "descripcion": "Framework maduro de testing en Python con soporte de aserciones legibles, fixtures y parametrización.",
+    "icono": "Shield",
+    "version": "v8.x",
+    "licencia": "Open Source (MIT)",
+    "uso": "Pruebas unitarias automatizadas y control de calidad de lógica interna de backend."
+  },
+  {
+    "id": 20,
+    "nombre": "Git & GitHub",
+    "categoria": "DevOps & Cloud",
+    "descripcion": "Sistema de control de versiones distribuido y plataforma centralizada de colaboración en equipo.",
+    "icono": "GitBranch",
+    "version": "Git v2.45+ / GitHub",
+    "licencia": "Open Source (GPLv2) / SaaS",
+    "uso": "Gestión de ramas, control de cambios, integración de código en equipo y versionado continuo."
+  },
+  {
+    "id": 21,
+    "nombre": "Docker",
+    "categoria": "DevOps & Cloud",
+    "descripcion": "Plataforma de contenerización para empaquetar aplicaciones y dependencias en entornos reproducibles y aislados.",
+    "icono": "Box",
+    "version": "v26.x",
+    "licencia": "Apache 2.0 / Comercial",
+    "uso": "Estandarización de entornos de ejecución y paridad idéntica entre desarrollo y producción."
+  }
+]
