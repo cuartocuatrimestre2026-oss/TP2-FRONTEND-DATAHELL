@@ -31,11 +31,11 @@ El objetivo principal de esta iteración ha sido modularizar la interfaz en comp
 
 | Nombre y Apellido | Rol Principal | Ubicación | Perfil de GitHub / Redes |
 | :--- | :--- | :--- | :--- |
-| **Johana Navarro** | Lógica JS & Documentación / QA | Córdoba Capital (Córdoba) | [@johana-navarro](https://github.com/johana-navarro) |
-| **Mariela Lorenzo** | Diseño UI/UX & Código - Creativa | Boedo (CABA) | [@MariuLorenzo](https://github.com/MariuLorenzo) |
+| **Johana Navarro** | Lógica JS & Documentación / QA | Córdoba Capital (Córdoba) | [@johana-navarro](https://github.com/johana-navarro) | [LinkedIn](https://www.linkedin.com/in/johana-navarro184/) |
+| **Mariela Lorenzo** | Diseño UI/UX & Código - Creativa | Boedo (CABA) | [@MariuLorenzo](https://github.com/MariuLorenzo) | [LinkedIn](https://www.linkedin.com/in/mariu-lorenzo/) |
 | **Miguel Martínez** | Diseño Gráfico & Infraestructura IT | Bahía Blanca (BsAs) | [@mpmarcol](https://github.com/mpmarcol) |
 | **Sergio Arenhardt** | Backend Dev & Bases de Datos | Eldorado (Misiones) | [@sealar24](https://github.com/sealar24) \| [LinkedIn](https://www.linkedin.com/in/sergio-alberto-arenhardt-8ba23a2a7/) |
-| **Sonia Pereira** | Maquetado Web & Arquitectura | Belgrano (CABA) | [@SonyGahan](https://github.com/SonyGahan) |
+| **Sonia Pereira** | Maquetado Web & Arquitectura | Belgrano (CABA) | [@SonyGahan](https://github.com/SonyGahan) |  [LinkedIn](https://www.linkedin.com/in/sonia-cpereira/) |
 
 > **Nota de Coautoría:** El desarrollo, migración a React, diseño de componentes y documentación de este proyecto fue realizado de manera conjunta y coordinada por los 5 integrantes del equipo DataHell, reflejando el trabajo colaborativo en este repositorio institucional.
 
