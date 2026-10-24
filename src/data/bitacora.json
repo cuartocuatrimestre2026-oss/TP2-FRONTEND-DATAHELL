@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "category": "decisiones",
+    "date": "Fase 1 · Planificación y Organización del Proyecto",
+    "title": "1. Coordinación Inicial y Definición de Roles",
+    "content": "Nos reunimos para leer detenidamente las consignas y requerimientos para la entrega del presente proyecto. Acordamos la división de tareas entre los integrantes \n(a.k.a: Johi, Mariü, Migue, Sergio, Sony).\nCreamos una nube compartida en Gmail y un repositorio público grupal en GitHub.",
+    "notes": [
+      {
+        "label": "Decisiones:",
+        "text": "Establecer una guía de estilo compartida (CSS Variables) en css/styles.css para evitar discrepancias de color y tipografía."
+      },
+      {
+        "label": "Próximo Paso:",
+        "text": "Realizar un cuestionario para evaluar el contenido de los perfiles personales."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "decisiones",
+    "date": "Fase 2 · Estructura, Maquetación HTML5 y Diseño Adaptativo",
+    "title": "2. Estructura HTML, Semántica y Grid System",
+    "content": "Se maquetaron las páginas principales: «portada» (index.html), «perfiles» individuales de los 5 integrantes y la «bitácora». Se utilizaron elementos semánticos (header, nav, main, article, aside, footer).",
+    "notes": [
+      {
+        "label": "Breakpoints Obligatorios:",
+        "text": "Configuración estricta de Media Queries CSS para 400px, 900px y 1200px garantizando visualización fluida sin desbordes."
+      },
+      {
+        "label": "Decisión de Diseño:",
+        "text": "Logotipo del equipo DataHell (iniciado con moodboard en Canva y bocetos manuales, digitalizado iterativamente con Gemini e IA), colores representativos de la marca e imágenes de perfil generados a partir de fotos reales."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "category": "dificultades",
+    "date": "Fase 3 · Retos Técnicos y Ajustes",
+    "title": "3. Dificultades Superadas durante el Desarrollo",
+    "content": "**Dificultad 1:** Desbordes de texto y tarjetas en dispositivos móviles de 400px.\n**Solución:** Implementación del menú desplegable \"Hamburger\" mediante JavaScript y ajuste de grid-template-columns: 1fr en pantallas pequeñas.\n\n**Dificultad 2:** Mantener uniformidad sin restringir la personalidad de los perfiles individuales.\n**Solución:** Uso de una tarjeta base común combinada con componentes dinámicos personalizados en JS.\n\n**Dificultad 3:** Garantizar que el soporte asistivo de la IA no afectara la autoría ni la calidad técnica requerida.\n**Solución:** Cada integrante redactó y curó sus propios contenidos personales, y el código fue revisado manualmente.",
+    "notes": [
+      {
+        "label": "Criterio sobre IA:",
+        "text": "El uso de Gemini y Antigravity aportó agilidad en la generación visual del logo y avatares, y en el cálculo de contrastes AAA, pero requirió estricto control humano."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "category": "decisiones",
+    "date": "Fase 4 · Interactividad Dinámica con JavaScript",
+    "title": "4. Implementación de Funciones Dinámicas",
+    "content": "Se integró JavaScript nativo para añadir dinamismo en la «portada» (generador de frases inspiradoras y contadores animados), en cada «perfil» (caja de reseña de películas/discos y envío de saludos) y en la presente «bitácora».",
+    "notes": []
+  },
+  {
+    "id": 5,
+    "category": "git",
+    "date": "Fase 5 · Publicación en Vercel y Documentación",
+    "title": "5. Publicación y Documentación Final en README",
+    "content": "Se conectó el repositorio grupal de GitHub con la plataforma Vercel para el despliegue continuo en producción. Redacción final del archivo README.md cumpliendo exhaustivamente con todos los criterios y requerimientos de la consigna asignada para el presente proyecto.",
+    "notes": []
+  },
+  {
+    "id": 6,
+    "category": "dificultades",
+    "date": "Fase 6 · Retos de Entorno y Migración a React SPA",
+    "title": "6. Retos de Migración a SPA y Configuración de Entorno",
+    "content": "Transición del proyecto estático a una Single Page Application (SPA) con React y Vite. Durante este proceso, se superaron restricciones de proxy corporativo (errores EINVALIDPROXY y fallos de handshake SSL EPROTO) mediante configuración de variables de entorno y migración a StackBlitz integrado con GitHub y Vercel. Se incorporó react-router-dom para la navegación asíncrona, sumando los componentes ScrollToTop y BotonSubir para optimizar la experiencia de usuario.",
+    "notes": [
+      {
+        "label": "Dificultad Superada:",
+        "text": "Bloqueos corporativos de proxy y certificados SSL en la descarga de paquetes npm para Vite, resueltos mediante túneles y sincronización Cloud."
+      },
+      {
+        "label": "Soporte IA:",
+        "text": "Verificó la estructura de la página y entregó opciones para la transición del proyecto a componentes React."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "category": "decisiones",
+    "date": "Fase 7 · Abstracción de Datos y Componentización",
+    "title": "7. Refactorización de Perfiles",
+    "content": "Optimización del código eliminando los 5 archivos HTML estáticos de los perfiles. La información se centralizó en archivos de datos JSON (equipo.js y tecnologias_data.json) que ahora alimentan componentes inteligentes paramétricos (<Perfil/>), los cuales cambian dinámicamente según la URL, separando la capa de datos de la capa de presentación.",
+    "notes": [
+      {
+        "label": "Soporte IA:",
+        "text": "Realizó la extracción de datos desde los HTML antiguos en forma automatizada para construir el archivo JSON estructurado. Asistió en cuestiones puntuales del mapeo para renderizar las habilidades y gustos de forma más práctica."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "category": "dificultades",
+    "date": "Fase 8 · Retos de Estados en React y Layout Shift",
+    "title": "8. Migración de DOM a Estados React y Prevención de Desplazamientos",
+    "content": "Reemplazo completo de la manipulación manual del DOM por el manejo de estados nativo de React (useState, useEffect, useRef). Durante la implementación de la cabecera sticky y el Scroll-Spy interactivo en la bitácora, se produjo un fallo de Layout Shift (saltos bruscos del contenido al scrollear). Se solucionó implementando un contenedor envolvente con compensación de altura fija, anclando además la tarjeta institucional final para preservar la estabilidad visual.",
+    "notes": [
+      {
+        "label": "Dificultad Superada:",
+        "text": "Inestabilidad visual y parpadeos durante el anclaje sticky resueltos con un wrapper de compensación dimensional."
+      },
+      {
+        "label": "Soporte IA:",
+        "text": "Asistió en la transición a hooks reactivos y formuló la estrategia del contenedor fantasma para estabilizar el viewport."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "category": "decisiones",
+    "date": "Fase 9 · Nueva Arquitectura de Navegación",
+    "title": "9. Implementación de Sidebar Retráctil",
+    "content": "Evolución de la interfaz incorporando un menú lateral retráctil (Sidebar) y un encabezado fijo (Header). Esto permitió separar la identidad visual de la navegación, mejorando significativamente la experiencia tanto en dispositivos móviles como en pantallas de escritorio, controlando el estado elevado (sidebarAbierto) desde App.jsx.",
+    "notes": [
+      {
+        "label": "Soporte IA:",
+        "text": "Asistió ante inconvenientes en la generación de la estructura base de los nuevos componentes de navegación, para las transiciones CSS para el despliegue del panel lateral y el comportamiento responsive para evitar desbordamientos en pantalla."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "category": "decisiones",
+    "date": "Fase 10 · Integración de Ecosistema DataHell",
+    "title": "10. Catálogo Tecnológico Interactivo",
+    "content": "Desarrollo de la sección /stack (Ecosistema) que renderiza dinámicamente un inventario tecnológico desde tecnologias_data.json. Se implementó un filtrado dual reactivo (búsqueda por texto y selección de categoría) que actualiza la grilla de tarjetas *glassmorphic* en tiempo real, e incluye un modal interactivo para sugerencias.",
+    "notes": [
+      {
+        "label": "Soporte IA:",
+        "text": "Asistió en la implementación del filtrado múltiple, la integración de la librería lucide-react para el mapeo dinámico de SVG basado en strings del JSON, y el diseño de la estructura del modal interactivo."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "category": "decisiones",
+    "date": "Fase 11 · Integración de API Pública",
+    "title": "11. Sincronización con GitHub",
+    "content": "Cumpliendo con los criterios de evaluación, se incorporó una llamada asíncrona a la API pública de GitHub dentro del componente Perfil. Mediante el uso de useEffect y Fetch, se obtienen dinámicamente los últimos repositorios del integrante basándose en su URL registrada, gestionando de forma segura los estados de carga (cargandoRepos) y fallo de conexión.",
+    "notes": [
+      {
+        "label": "Soporte IA:",
+        "text": "Asesoró sobre opciones de APIs públicas pertinentes para el proyecto sin requerir claves privadas, y apoyó en la estructuración de la llamada fetch asíncrona y el manejo de los estados de error para evitar caídas de la interfaz."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "category": "git",
+    "date": "Fase 12 · Configuración de Enrutamiento SPA y CI/CD en Vercel",
+    "title": "12. Despliegue SPA en Vercel y Reglas de Redirección",
+    "content": "Al desplegar la aplicación en Vercel, la navegación inicial funcionaba correctamente, pero recargar rutas profundas (como /perfil/johi, /stack o /arbol) provocaba un error 404 (NOT_FOUND) debido a que el servidor intentaba resolver un archivo físico inexistente. Se creó el archivo vercel.json configurando reglas de reescritura hacia index.html (SPA Rewrites), garantizando que React Router controle todas las rutas en producción con CI/CD automatizado.",
+    "notes": [
+      {
+        "label": "Configuración Clave:",
+        "text": "Inclusión de vercel.json con rewrite hacia index.html y verificación de build sin advertencias de dependencias."
+      }
+    ]
+  }
+]
