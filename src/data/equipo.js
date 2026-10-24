@@ -73,7 +73,7 @@ export const equipoData = [
     bio: '"Entiendo el ser y la vida como un flujo constante. Habito ese espacio en mí, donde desarrollo mi potencialidad, libre de definiciones, protegida por el misterio de lo que aún no he llegado a ser.\n​Mi trayectoria es un mapa de curiosidades: estudié distintas disciplinas, asumí roles variados, fui parte de muchos proyectos en diversas áreas.\nSoy, disfruto mi multiplicidad y me impulsa una pasión inagotable."',
     cita: '"El tiempo fluye como líquido entre tus manos..." — Mariü',
     github: "https://github.com/MariuLorenzo",
-    linkedin: "https://www.linkedin.com/in/mariulorenzo/",
+    linkedin: "https://www.linkedin.com/in/mariu-lorenzo/",
     habilidades: [
       "Diseño Creativo & Artes Visuales",
       "Criterio UX/UI & Figma",
@@ -263,7 +263,7 @@ export const equipoData = [
     bio: '"Soy Analista de Sistemas especializada en desarrollo web y software.\nDisfruto transformar problemas e ideas en soluciones claras, ordenadas y mantenibles.\nMi objetivo es crecer como desarrolladora conservando la mirada humana, combinando lógica y creatividad para crear soluciones funcionales, agradables para el usuario y con propósito."',
     cita: '"Di fronte al mare la felicita e’ una idea semplice."\n"Frente al mar, la felicidad es una idea sencilla." — Jean-Claude Izzo',
     github: "https://github.com/SonyGahan",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/sonia-cpereira/",
     habilidades: [
       "Desarrollo en JAVA",
       "HTML5 / CSS3 / JavaScript",
