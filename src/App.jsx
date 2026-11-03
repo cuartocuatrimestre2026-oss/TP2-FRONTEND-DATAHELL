@@ -72,7 +72,7 @@ function App() {
             </p>
             <div style={{ marginTop: "0.85rem" }}>
               <Link to="/game" className="footer-game-pill">
-                🎮 ¿Te sobró tiempo? Jugá al DataHell Runner
+                Todos llevamos un gamer dentro · Jugá al DataHell Runner
               </Link>
             </div>
           </footer>

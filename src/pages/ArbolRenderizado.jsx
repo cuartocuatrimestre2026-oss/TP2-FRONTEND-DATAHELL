@@ -86,7 +86,7 @@ const arbolData = {
           id: "game",
           nombre: "<ArcadeGame /> (Ruta '/game')",
           tipo: "Easter Egg / Minijuego",
-          desc: "Experiencia interactiva arcade (DataHell Runner) estilo dino offline pero con conexión, temática de bugs y Web Audio API sintetizada.",
+          desc: "Experiencia interactiva arcade: 'En DataHell creemos que todos llevamos un gamer dentro'. Controla a nuestro diablito esquivando bugs con Web Audio API sintetizada.",
           props: "Ninguna",
           estado: "Sin estado propio (orquesta el componente de juego)",
           hijos: [

@@ -278,45 +278,151 @@ export default function DataHellRunner() {
         }
       }
 
-      // Renderizado del jugador (DataHell Dev / Flame Runner)
+      // Renderizado del jugador: ¡Diablito guardián de DataHell!
       const p = s.player;
       ctx.save();
       ctx.translate(p.x, p.y);
 
-      // Cuerpo del dev / robot
-      ctx.fillStyle = "#c6490f"; // Color corporativo DataHell
-      ctx.fillRect(4, 10, 20, 18);
-
-      // Cabeza
-      ctx.fillStyle = isLight ? "#161415" : "#eaf0f0";
-      ctx.fillRect(6, 2, 16, 10);
-
-      // Visor / Ojos
-      ctx.fillStyle = "#00f0ff";
-      ctx.fillRect(14, 4, 6, 4);
-
-      // Llama de DataHell sobre la cabeza
-      ctx.fillStyle = "#ff7b00";
+      // 1. Cola de diablito animada (con oscilación y punta de flecha)
+      const tailWag = Math.sin(s.frameCount * 0.35) * 3.5;
+      ctx.strokeStyle = "#b71c1c";
+      ctx.lineWidth = 2.5;
       ctx.beginPath();
-      ctx.moveTo(10, 2);
-      ctx.lineTo(14, -6 - (s.frameCount % 3));
-      ctx.lineTo(18, 2);
+      ctx.moveTo(4, 21);
+      ctx.quadraticCurveTo(-4, 18 + tailWag, -7, 13 + tailWag);
+      ctx.stroke();
+
+      // Punta de flecha de la cola
+      ctx.fillStyle = "#e53935";
+      ctx.beginPath();
+      ctx.moveTo(-11, 13 + tailWag);
+      ctx.lineTo(-6, 9 + tailWag);
+      ctx.lineTo(-5, 17 + tailWag);
+      ctx.closePath();
       ctx.fill();
 
-      // Piernas animadas
-      ctx.fillStyle = isLight ? "#161415" : "#eaf0f0";
+      // 2. Alas pequeñas de diablito (aleteo animado)
+      const wingFlap = p.isGrounded ? Math.sin(s.frameCount * 0.28) * 2.5 : -3.5;
+      ctx.fillStyle = "#7f0000";
+      ctx.beginPath();
+      ctx.moveTo(5, 14);
+      ctx.lineTo(-3, 8 + wingFlap);
+      ctx.lineTo(1, 16);
+      ctx.closePath();
+      ctx.fill();
+
+      // 3. Cuerpo del diablito (rojo DataHell vibrante)
+      ctx.fillStyle = "#d32f2f";
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(4, 11, 18, 16, 4);
+        ctx.fill();
+      } else {
+        ctx.fillRect(4, 11, 18, 16);
+      }
+
+      // Pancita anaranjada fuego
+      ctx.fillStyle = "#ff7043";
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(8, 14, 10, 11, 3);
+        ctx.fill();
+      } else {
+        ctx.fillRect(8, 14, 10, 11);
+      }
+
+      // 4. Cabeza del diablito
+      ctx.fillStyle = "#e53935";
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(5, 3, 17, 11, 4);
+        ctx.fill();
+      } else {
+        ctx.fillRect(5, 3, 17, 11);
+      }
+
+      // 5. Cuernitos de diablo dorados/fuego (afilados y estilizados)
+      // Cuerno trasero
+      ctx.fillStyle = "#ff9100";
+      ctx.beginPath();
+      ctx.moveTo(6, 4);
+      ctx.lineTo(3, -5);
+      ctx.lineTo(10, 3);
+      ctx.closePath();
+      ctx.fill();
+
+      // Cuerno delantero
+      ctx.fillStyle = "#ffab00";
+      ctx.beginPath();
+      ctx.moveTo(17, 3);
+      ctx.lineTo(22, -5);
+      ctx.lineTo(20, 5);
+      ctx.closePath();
+      ctx.fill();
+
+      // 6. Ojo travieso y pícaro (amarillo brillante con pupila negra que mira al frente)
+      ctx.fillStyle = "#fff176";
+      ctx.fillRect(13, 5, 6, 4);
+      ctx.fillStyle = "#161415";
+      ctx.fillRect(16, 6, 2.5, 3); // pupila
+
+      // Ceja decidida
+      ctx.fillStyle = "#7f0000";
+      ctx.fillRect(12, 4, 6, 1.2);
+
+      // Sonrisita pícara con colmillo de diablito
+      ctx.fillStyle = "#161415";
+      ctx.fillRect(14, 10, 5, 1.5);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(14, 11, 1.8, 2); // colmillito blanco
+
+      // 7. Mini tridente dorado en la mano
+      // Mano del diablito
+      ctx.fillStyle = "#d32f2f";
+      ctx.beginPath();
+      ctx.arc(19, 17, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Asta dorada del tridente
+      ctx.strokeStyle = "#ffd54f";
+      ctx.lineWidth = 1.8;
+      ctx.beginPath();
+      ctx.moveTo(17, 23);
+      ctx.lineTo(25, 8);
+      ctx.stroke();
+
+      // Puntas del tridente
+      ctx.fillStyle = "#ffc107";
+      ctx.fillRect(23, 4, 2, 5); // punta central
+      ctx.fillRect(21, 6, 2, 3); // punta inferior
+      ctx.fillRect(25, 6, 2, 3); // punta superior
+      ctx.fillRect(21, 7, 6, 1.5); // base conectora
+
+      // 8. Piernas animadas con pezuñas negras
+      ctx.fillStyle = "#b71c1c";
       if (p.isGrounded) {
         if (p.legFrame === 0) {
-          ctx.fillRect(6, 28, 5, 10);
-          ctx.fillRect(16, 28, 5, 7);
+          ctx.fillRect(6, 27, 5, 10);
+          ctx.fillRect(15, 27, 5, 7);
+          // pezuñas
+          ctx.fillStyle = "#161415";
+          ctx.fillRect(6, 36, 6, 2);
+          ctx.fillRect(15, 32, 6, 2);
         } else {
-          ctx.fillRect(6, 28, 5, 7);
-          ctx.fillRect(16, 28, 5, 10);
+          ctx.fillRect(6, 27, 5, 7);
+          ctx.fillRect(15, 27, 5, 10);
+          // pezuñas
+          ctx.fillStyle = "#161415";
+          ctx.fillRect(6, 32, 6, 2);
+          ctx.fillRect(15, 36, 6, 2);
         }
       } else {
-        // En el aire: piernas flexionadas
-        ctx.fillRect(6, 28, 6, 6);
-        ctx.fillRect(15, 28, 6, 6);
+        // En el aire: patas flexionadas para salto
+        ctx.fillRect(6, 27, 5, 6);
+        ctx.fillRect(14, 27, 5, 6);
+        ctx.fillStyle = "#161415";
+        ctx.fillRect(6, 32, 6, 2);
+        ctx.fillRect(14, 32, 6, 2);
       }
 
       ctx.restore();
@@ -389,7 +495,7 @@ export default function DataHellRunner() {
         ctx.fillText("PRESIONÁ ESPACIO O TOCÁ LA PANTALLA PARA EMPEZAR", W / 2, H / 2 - 10);
         ctx.fillStyle = "var(--accent-orange)";
         ctx.font = "13px Inter, sans-serif";
-        ctx.fillText("Esquivá los bugs y servidores caídos de DataHell", W / 2, H / 2 + 15);
+        ctx.fillText("Ayudá al diablito a esquivar los bugs de DataHell", W / 2, H / 2 + 15);
       }
 
       // Mensaje de Game Over

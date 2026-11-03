@@ -61,13 +61,13 @@ export default function NotFound() {
             color: "var(--slate)",
             fontSize: "1.05rem",
             lineHeight: 1.6,
-            maxWidth: "580px",
+            maxWidth: "600px",
             margin: "0 auto 1.5rem auto",
           }}
         >
-          Parece que te has desviado en las profundidades del código. Mientras
-          recalculamos el despliegue... <strong>¿te sobró tiempo?</strong> Probá el
-          clásico juego offline, ¡pero con conexión y esquivando bugs de DataHell!
+          Parece que te has desviado en las profundidades del código. En DataHell creemos que
+          todos llevamos un gamer dentro: mientras recalculamos la ruta, ¡ayudá a nuestro diablito
+          a esquivar los bugs de producción!
         </p>
 
         {/* Minijuego embebido */}
