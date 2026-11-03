@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { equipoData } from "../data/equipo";
 import "../css/perfil.css";
@@ -11,14 +11,21 @@ export default function Perfil() {
   const [discoActivo, setDiscoActivo] = useState(null);
   const [toastVisible, setToastVisible] = useState(false);
   const [toastAnimacion, setToastAnimacion] = useState("");
+  const [toastMensaje, setToastMensaje] = useState({ titulo: "", texto: "", icono: "🔥" });
 
   const [repos, setRepos] = useState([]);
   const [cargandoRepos, setCargandoRepos] = useState(false);
   const [errorRepos, setErrorRepos] = useState(null);
 
-  const enviarSaludo = () => {
+  // Estados del reproductor de audio
+  const audioRef = useRef(null);
+  const [reproduciendo, setReproduciendo] = useState(false);
+  const [progreso, setProgreso] = useState(0);
+
+  const mostrarToast = (titulo, texto, icono = "🔥") => {
     if (toastVisible) return;
 
+    setToastMensaje({ titulo, texto, icono });
     setToastAnimacion("toastIn");
     setToastVisible(true);
 
@@ -28,7 +35,27 @@ export default function Perfil() {
         setToastVisible(false);
         setToastAnimacion("");
       }, 300);
-    }, 2200);
+    }, 2500);
+  };
+
+  const enviarSaludo = () => {
+    mostrarToast(
+      "¡Saludo Enviado!",
+      `Le enviaste un saludo virtual a ${persona.nombre}. ¡Gracias por visitar su perfil!`,
+      "🔥"
+    );
+  };
+
+  const copiarEnlacePerfil = () => {
+    const url = window.location.href;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url);
+    }
+    mostrarToast(
+      "¡Enlace Copiado!",
+      `Se copió el enlace directo al perfil de ${persona.nombre} al portapapeles.`,
+      "🔗"
+    );
   };
 
   const cerrarToast = () => {
@@ -40,15 +67,84 @@ export default function Perfil() {
   };
 
   useEffect(() => {
+    // Si había audio sonando, detenerlo
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setReproduciendo(false);
+    setProgreso(0);
     setPeliActiva(null);
     setDiscoActivo(null);
     setToastVisible(false);
+
     if (persona) {
       document.title = `DataHell | ${persona.nombre}`;
     } else {
       document.title = "DataHell | Perfil no encontrado";
     }
   }, [id, persona]);
+
+  const seleccionarDisco = (disco) => {
+    if (discoActivo?.titulo === disco.titulo) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      setDiscoActivo(null);
+      setReproduciendo(false);
+      setProgreso(0);
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      setDiscoActivo(disco);
+      setReproduciendo(false);
+      setProgreso(0);
+    }
+  };
+
+  const toggleAudio = (e) => {
+    e.stopPropagation();
+    if (!audioRef.current) return;
+
+    if (reproduciendo) {
+      audioRef.current.pause();
+      setReproduciendo(false);
+    } else {
+      audioRef.current
+        .play()
+        .then(() => {
+          setReproduciendo(true);
+        })
+        .catch((err) => {
+          console.warn("Reproducción no iniciada:", err);
+        });
+    }
+  };
+
+  const actualizarProgresoAudio = () => {
+    if (audioRef.current && audioRef.current.duration) {
+      const porcentaje =
+        (audioRef.current.currentTime / audioRef.current.duration) * 100;
+      setProgreso(porcentaje);
+    }
+  };
+
+  const audioTerminado = () => {
+    setReproduciendo(false);
+    setProgreso(0);
+  };
+
+  const adelantarAudio = (e) => {
+    if (!audioRef.current || !audioRef.current.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const nuevoPorcentaje = Math.max(0, Math.min(1, clickX / rect.width));
+    audioRef.current.currentTime = nuevoPorcentaje * audioRef.current.duration;
+    setProgreso(nuevoPorcentaje * 100);
+  };
 
   const consultarRepositorios = () => {
     if (!persona || !persona.github) return;
@@ -110,6 +206,7 @@ export default function Perfil() {
 
   return (
     <main className="main-content">
+      {/* Controles de navegación superior */}
       <div
         style={{
           marginBottom: "1.5rem",
@@ -142,6 +239,7 @@ export default function Perfil() {
       </div>
 
       <div className="profile-container">
+        {/* Sidebar con información personal */}
         <aside className="profile-sidebar">
           <div className="profile-avatar-lg">
             <img src={persona.avatar} alt={`Avatar ${persona.nombre}`} />
@@ -170,16 +268,29 @@ export default function Perfil() {
             {persona.cita}
           </blockquote>
 
-          <button
-            className="btn btn-primary"
-            style={{ width: "100%" }}
-            onClick={enviarSaludo}
-          >
-            Enviar Saludo a {persona.nombre.split(" ")[0]}
-          </button>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginTop: "1.2rem" }}>
+            <button
+              className="btn btn-primary"
+              style={{ width: "100%" }}
+              onClick={enviarSaludo}
+            >
+              Enviar Saludo a {persona.nombre.split(" ")[0]}
+            </button>
+
+            <button
+              className="btn btn-outline"
+              style={{ width: "100%" }}
+              onClick={copiarEnlacePerfil}
+              aria-label="Compartir perfil de integrante"
+            >
+              🔗 Compartir Perfil
+            </button>
+          </div>
         </aside>
 
+        {/* Sección principal del perfil */}
         <section className="profile-main">
+          {/* Habilidades destacadas */}
           <div className="card-section">
             <h3 className="section-title">Habilidades Destacadas</h3>
             <div className="skills-grid">
@@ -191,6 +302,7 @@ export default function Perfil() {
             </div>
           </div>
 
+          {/* Actividad en GitHub (API pública) */}
           {persona.github && (
             <div className="card-section">
               <div
@@ -330,6 +442,7 @@ export default function Perfil() {
             </div>
           )}
 
+          {/* Películas favoritas */}
           <div className="card-section">
             <h3 className="section-title">Películas Favoritas</h3>
             <div className="media-list">
@@ -366,24 +479,29 @@ export default function Perfil() {
             )}
           </div>
 
+          {/* Discos favoritos con reproductor de audio integrado */}
           <div className="card-section">
-            <h3 className="section-title">Discos / Artistas Favoritos</h3>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+              <h3 className="section-title" style={{ marginBottom: 0 }}>
+                Discos / Artistas Favoritos
+              </h3>
+              <span style={{ fontSize: "0.75rem", color: "var(--accent-orange)", letterSpacing: "0.05em", textTransform: "uppercase", fontWeight: 600 }}>
+                ● Incluye Audio Real
+              </span>
+            </div>
+
             <div className="media-list">
               {persona.discos.map((disco, index) => (
                 <div
                   key={index}
                   className={`media-item ${discoActivo?.titulo === disco.titulo ? "active-media" : ""}`}
-                  onClick={() =>
-                    setDiscoActivo(
-                      discoActivo?.titulo === disco.titulo ? null : disco,
-                    )
-                  }
+                  onClick={() => seleccionarDisco(disco)}
                 >
                   <span className="media-icon">{iconoDisco}</span>
                   <div>
                     <strong>{disco.titulo}</strong>
                     <p style={{ fontSize: "0.8rem", color: "var(--slate)" }}>
-                      {disco.anio}
+                      {disco.anio || (disco.artista ? `${disco.artista} · Muestra sonora` : "Música")}
                     </p>
                   </div>
                 </div>
@@ -398,10 +516,81 @@ export default function Perfil() {
                   </h4>
                   <p className="media-review-text">{discoActivo.desc}</p>
                 </div>
+
+                {discoActivo.audioUrl && (
+                  <div className="audio-player-card">
+                    <div className="audio-player-cover">
+                      <img
+                        src={discoActivo.portada}
+                        alt={`Carátula de ${discoActivo.cancion}`}
+                        className="audio-cover-img"
+                      />
+                      <button
+                        type="button"
+                        className={`audio-play-btn ${reproduciendo ? "is-playing" : ""}`}
+                        onClick={toggleAudio}
+                        aria-label={reproduciendo ? "Pausar muestra musical" : "Reproducir muestra musical"}
+                      >
+                        {reproduciendo ? "⏸" : "▶"}
+                      </button>
+                    </div>
+
+                    <div className="audio-player-info">
+                      <div className="audio-player-header">
+                        <div style={{ minWidth: 0 }}>
+                          <strong className="audio-track-name">{discoActivo.cancion}</strong>
+                          <span className="audio-artist-name">{discoActivo.artista}</span>
+                        </div>
+                        {reproduciendo && (
+                          <div className="sound-wave-bars" title="Sonando en vivo">
+                            <span className="wave-bar b1"></span>
+                            <span className="wave-bar b2"></span>
+                            <span className="wave-bar b3"></span>
+                            <span className="wave-bar b4"></span>
+                          </div>
+                        )}
+                      </div>
+
+                      <div
+                        className="audio-progress-container"
+                        onClick={adelantarAudio}
+                        title="Haz clic para avanzar o retroceder"
+                      >
+                        <div
+                          className="audio-progress-fill"
+                          style={{ width: `${progreso}%` }}
+                        ></div>
+                      </div>
+
+                      <div className="audio-player-footer">
+                        <span className="audio-tag-badge">Audio Oficial (30s)</span>
+                        {discoActivo.enlaceExterno && (
+                          <a
+                            href={discoActivo.enlaceExterno}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="audio-external-btn"
+                          >
+                            Escuchar Completo ↗
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    <audio
+                      ref={audioRef}
+                      src={discoActivo.audioUrl}
+                      onTimeUpdate={actualizarProgresoAudio}
+                      onEnded={audioTerminado}
+                      preload="auto"
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>
 
+          {/* Datos curiosos */}
           <div className="card-section">
             <h3 className="section-title">Datos Curiosos & Intereses</h3>
             <ul
@@ -421,20 +610,47 @@ export default function Perfil() {
         </section>
       </div>
 
+      {/* Navegación rápida inferior a todos los integrantes */}
+      <div className="quick-team-nav-card">
+        <h3 className="section-title" style={{ textAlign: "center", marginBottom: "0.4rem" }}>
+          Integrantes del Equipo DataHell
+        </h3>
+        <p style={{ textAlign: "center", color: "var(--slate)", fontSize: "0.85rem", marginBottom: "1.2rem" }}>
+          Haz clic en cualquier compañero para visitar su perfil directamente
+        </p>
+        <div className="quick-team-grid">
+          {equipoData.map((m) => {
+            const esActivo = m.id === id;
+            return (
+              <Link
+                key={m.id}
+                to={`/perfil/${m.id}`}
+                className={`quick-member-link ${esActivo ? "is-current" : ""}`}
+                title={`Ver perfil de ${m.nombre}`}
+              >
+                <div className="quick-member-avatar-wrap">
+                  <img src={m.avatar} alt={m.nombre} />
+                  {esActivo && <span className="current-badge-dot">●</span>}
+                </div>
+                <strong className="quick-member-name">{m.nombre.split(" ")[0]}</strong>
+                <span className="quick-member-role">{m.rol.split("&")[0].split("+")[0].trim()}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Toast universal para saludos o compartir */}
       {toastVisible && (
         <div className={`custom-toast ${toastAnimacion}`}>
-          <div className="custom-toast-icon">🔥</div>
+          <div className="custom-toast-icon">{toastMensaje.icono}</div>
           <div className="custom-toast-content">
-            <div className="custom-toast-title">¡Saludo Enviado!</div>
-            <div className="custom-toast-message">
-              Le enviaste un saludo virtual a <strong>{persona.nombre}</strong>.
-              <br />
-              ¡Gracias por visitar su perfil!
-            </div>
+            <div className="custom-toast-title">{toastMensaje.titulo}</div>
+            <div className="custom-toast-message">{toastMensaje.texto}</div>
           </div>
           <button
             className="custom-toast-close"
-            aria-label="Cerrar"
+            aria-label="Cerrar notificación"
             onClick={cerrarToast}
           >
             &times;

@@ -8,7 +8,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 13, 14, 0.98);
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--mist);
 }
 
@@ -18,8 +20,8 @@
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .header-menu-btn {
@@ -64,13 +66,11 @@
 }
 
 .header-brand-link:hover {
-  /* background: rgba(235, 141, 98, 0.12); */
   transform: translateY(-2px);
-  text-shadow: 0 6px 20px rgba(223, 121, 74, 0.404);
 }
 
 .header-brand-link:hover .header-brand-text {
-  color: rgba(255, 255, 255, 1);
+  color: var(--accent-orange);
 }
 
 .header-logo-img {
@@ -78,4 +78,68 @@
   width: auto;
   display: block;
   object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.header-brand-link:hover .header-logo-img {
+  transform: scale(1.05);
+}
+
+
+.header-left-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-right-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--accent-violet-soft);
+  border: 1px solid var(--mist);
+  color: var(--ink);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--mist);
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(198, 73, 15, 0.2);
+}
+
+.theme-icon {
+  color: var(--accent-orange);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+  transform: rotate(20deg) scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .theme-toggle-text {
+    display: none;
+  }
+  .theme-toggle-btn {
+    padding: 0.5rem;
+    border-radius: 50%;
+  }
 }

@@ -42,7 +42,34 @@ export default function Tecnologias() {
 
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
+  const [orden, setOrden] = useState("default");
   const [expandidoId, setExpandidoId] = useState(null);
+
+  // Sistema de Favoritos con persistencia en localStorage
+  const [favoritos, setFavoritos] = useState(() => {
+    try {
+      const guardados = localStorage.getItem("datahell_fav_techs");
+      return guardados ? JSON.parse(guardados) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+  const [soloFavoritos, setSoloFavoritos] = useState(false);
+
+  const toggleFavorito = (id, e) => {
+    e.stopPropagation();
+    setFavoritos((prev) => {
+      const nuevo = prev.includes(id)
+        ? prev.filter((item) => item !== id)
+        : [...prev, id];
+      try {
+        localStorage.setItem("datahell_fav_techs", JSON.stringify(nuevo));
+      } catch (err) {
+        console.warn("Error guardando favoritos en localStorage:", err);
+      }
+      return nuevo;
+    });
+  };
 
   useEffect(() => {
     if (expandidoId === null) return;
@@ -79,16 +106,27 @@ export default function Tecnologias() {
     ...new Set(tecnologiasData.map((t) => t.categoria)),
   ].sort();
 
-  const resultadosFiltrados = tecnologiasData.filter((tec) => {
-    const coincideTexto =
-      tec.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      tec.descripcion.toLowerCase().includes(busqueda.toLowerCase());
+  // Filtrado y ordenamiento combinado
+  const resultadosFiltrados = tecnologiasData
+    .filter((tec) => {
+      const coincideTexto =
+        tec.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        tec.descripcion.toLowerCase().includes(busqueda.toLowerCase()) ||
+        tec.uso.toLowerCase().includes(busqueda.toLowerCase());
 
-    const coincideCategoria =
-      categoria === "Todas" || tec.categoria === categoria;
+      const coincideCategoria =
+        categoria === "Todas" || tec.categoria === categoria;
 
-    return coincideTexto && coincideCategoria;
-  });
+      const coincideFavorito = !soloFavoritos || favoritos.includes(tec.id);
+
+      return coincideTexto && coincideCategoria && coincideFavorito;
+    })
+    .sort((a, b) => {
+      if (orden === "nombre-asc") return a.nombre.localeCompare(b.nombre);
+      if (orden === "nombre-desc") return b.nombre.localeCompare(a.nombre);
+      if (orden === "categoria") return a.categoria.localeCompare(b.categoria);
+      return 0; // default order in JSON
+    });
 
   const manejarEnvioSugerencia = (e) => {
     e.preventDefault();
@@ -98,6 +136,13 @@ export default function Tecnologias() {
       setModalAbierto(false);
       setSugerenciaEnviada(false);
     }, 2500);
+  };
+
+  const limpiarFiltros = () => {
+    setBusqueda("");
+    setCategoria("Todas");
+    setOrden("default");
+    setSoloFavoritos(false);
   };
 
   return (
@@ -113,6 +158,7 @@ export default function Tecnologias() {
           digital.
         </p>
 
+        {/* Panel de filtros, búsqueda, favoritos y ordenamiento en 2 niveles limpios */}
         <div className="filtros-container">
           <div className="search-box">
             <svg
@@ -131,29 +177,66 @@ export default function Tecnologias() {
             </svg>
             <input
               type="text"
-              placeholder="Buscar tecnología (ej: React, Docker)..." aria-label="Buscar tecnologías por nombre o descripción"
+              placeholder="Buscar tecnología o área (ej: React, Docker, Backend, Spring)..."
+              aria-label="Buscar tecnologías por nombre, descripción o uso"
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               className="search-input"
             />
+            {busqueda && (
+              <button
+                type="button"
+                className="search-clear-btn"
+                onClick={() => setBusqueda("")}
+                aria-label="Borrar búsqueda"
+              >
+                &times;
+              </button>
+            )}
           </div>
 
-          <select
-            className="category-select"
-            aria-label="Filtrar tecnologías por categoría"
-            value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
-          >
-            {categoriasUnicas.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat.replace("_/_", " / ")}
-              </option>
-            ))}
-          </select>
+          <div className="filter-controls-row">
+            <select
+              className="category-select"
+              aria-label="Filtrar tecnologías por categoría"
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+            >
+              {categoriasUnicas.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat === "Todas" ? "Todas las Categorías" : cat.replace("_/_", " / ")}
+                </option>
+              ))}
+            </select>
+
+            <select
+              className="category-select sort-select"
+              aria-label="Ordenar resultados"
+              value={orden}
+              onChange={(e) => setOrden(e.target.value)}
+            >
+              <option value="default">Ordenar: Predeterminado</option>
+              <option value="nombre-asc">Nombre (A → Z)</option>
+              <option value="nombre-desc">Nombre (Z → A)</option>
+              <option value="categoria">Por Categoría</option>
+            </select>
+
+            <button
+              type="button"
+              className={`btn ${soloFavoritos ? "btn-primary" : "btn-outline"} fav-filter-btn ${soloFavoritos ? "is-active" : ""}`}
+              onClick={() => setSoloFavoritos(!soloFavoritos)}
+              title={soloFavoritos ? "Mostrar todas las herramientas" : "Filtrar solo herramientas favoritas"}
+            >
+              ★ Favoritas ({favoritos.length})
+            </button>
+          </div>
         </div>
 
         <div className="resultados-info">
-          <span>{resultadosFiltrados.length} Tecnologías Indexadas</span>
+          <span>
+            Mostrando <strong>{resultadosFiltrados.length}</strong> de {tecnologiasData.length} Tecnologías
+            {soloFavoritos && " (Filtrado por Favoritas)"}
+          </span>
           <span className="separator">|</span>
           <span
             className="text-accent"
@@ -183,60 +266,73 @@ export default function Tecnologias() {
 
       {resultadosFiltrados.length > 0 ? (
         <section className="tech-grid">
-          {resultadosFiltrados.map((tec) => (
-            <article
-              key={tec.id}
-              className={`tech-card ${expandidoId === tec.id ? "is-expanded" : ""}`}
-              onClick={() => setExpandidoId(expandidoId === tec.id ? null : tec.id)}
-            >
-              <div className="tech-card-header">
-                <div className="tech-icon-wrapper">
-                  {(() => {
-                    const IconoVisual = mapaIconos[tec.icono] || Settings;
-                    return <IconoVisual size={22} />;
-                  })()}
-                </div>
-                <div className="tech-title-group">
-                  <h3 className="tech-name">{tec.nombre}</h3>
-                </div>
-              </div>
-              <p className="tech-desc">{tec.descripcion}</p>
+          {resultadosFiltrados.map((tec) => {
+            const esFav = favoritos.includes(tec.id);
+            return (
+              <article
+                key={tec.id}
+                className={`tech-card ${expandidoId === tec.id ? "is-expanded" : ""} ${esFav ? "has-favorite" : ""}`}
+                onClick={() => setExpandidoId(expandidoId === tec.id ? null : tec.id)}
+              >
+                <div className="tech-card-header">
+                  <div className="tech-icon-wrapper">
+                    {(() => {
+                      const IconoVisual = mapaIconos[tec.icono] || Settings;
+                      return <IconoVisual size={22} />;
+                    })()}
+                  </div>
+                  <div className="tech-title-group">
+                    <h3 className="tech-name">{tec.nombre}</h3>
+                  </div>
 
-              {expandidoId === tec.id && (
-                <div className="tech-extra-info">
-                  <div className="tech-info-row">
-                    <span className="info-label">Versión / Estándar:</span>
-                    <span className="info-value">{tec.version}</span>
-                  </div>
-                  <div className="tech-info-row">
-                    <span className="info-label">Licencia:</span>
-                    <span className="info-value">{tec.licencia}</span>
-                  </div>
-                  <div className="tech-info-row">
-                    <span className="info-label">Uso en DataHell:</span>
-                    <span className="info-value">{tec.uso}</span>
-                  </div>
+                  <button
+                    type="button"
+                    className={`tech-star-btn ${esFav ? "active" : ""}`}
+                    onClick={(e) => toggleFavorito(tec.id, e)}
+                    aria-label={esFav ? "Quitar de favoritas" : "Marcar como favorita"}
+                    title={esFav ? "Quitar de favoritas" : "Marcar como favorita"}
+                  >
+                    {esFav ? "★" : "☆"}
+                  </button>
                 </div>
-              )}
+                <p className="tech-desc">{tec.descripcion}</p>
 
-              <div className="tech-card-footer">
-                <span className="tech-tag-bottom">
-                  {tec.categoria.replace("_/_", " / ")}
-                </span>
-                <button
-                  type="button"
-                  className="tech-toggle-btn"
-                  aria-expanded={expandidoId === tec.id}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setExpandidoId(expandidoId === tec.id ? null : tec.id);
-                  }}
-                >
-                  {expandidoId === tec.id ? "Ocultar detalles ▴" : "Ver detalles ▾"}
-                </button>
-              </div>
-            </article>
-          ))}
+                {expandidoId === tec.id && (
+                  <div className="tech-extra-info">
+                    <div className="tech-info-row">
+                      <span className="info-label">Versión / Estándar:</span>
+                      <span className="info-value">{tec.version}</span>
+                    </div>
+                    <div className="tech-info-row">
+                      <span className="info-label">Licencia:</span>
+                      <span className="info-value">{tec.licencia}</span>
+                    </div>
+                    <div className="tech-info-row">
+                      <span className="info-label">Uso en DataHell:</span>
+                      <span className="info-value">{tec.uso}</span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="tech-card-footer">
+                  <span className="tech-tag-bottom">
+                    {tec.categoria.replace("_/_", " / ")}
+                  </span>
+                  <button
+                    type="button"
+                    className="tech-toggle-btn"
+                    aria-expanded={expandidoId === tec.id}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandidoId(expandidoId === tec.id ? null : tec.id);
+                    }}
+                  >
+                    {expandidoId === tec.id ? "Ocultar detalles ▴" : "Ver detalles ▾"}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
         </section>
       ) : (
         <div className="empty-state">
@@ -255,16 +351,17 @@ export default function Tecnologias() {
             <line x1="12" y1="16" x2="12.01" y2="16"></line>
           </svg>
           <h3>Sin resultados</h3>
-          <p>No se encontraron tecnologías que coincidan con "{busqueda}".</p>
+          <p>
+            {soloFavoritos
+              ? "Aún no has guardado herramientas en tus favoritas. Haz clic en la estrella (☆) de cualquier tarjeta para agregarla."
+              : `No se encontraron tecnologías que coincidan con "${busqueda}".`}
+          </p>
           <button
             className="btn btn-outline"
-            onClick={() => {
-              setBusqueda("");
-              setCategoria("Todas");
-            }}
+            onClick={limpiarFiltros}
             style={{ marginTop: "1rem" }}
           >
-            Limpiar filtros
+            Restablecer todos los filtros
           </button>
         </div>
       )}

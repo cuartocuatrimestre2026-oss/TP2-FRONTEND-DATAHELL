@@ -1,0 +1,111 @@
+/* === ESTILOS PARA DATAHELL RUNNER (MINI-JUEGO RETRO) === */
+
+.runner-game-wrapper {
+  width: 100%;
+  max-width: 680px;
+  margin: 1.5rem auto;
+  background: var(--bg-card);
+  border: 1.5px solid var(--mist);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 12px 35px rgba(198, 73, 15, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.runner-scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--mist);
+  font-family: var(--font-body);
+}
+
+.runner-score-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.runner-score-label {
+  font-size: 0.75rem;
+  color: var(--slate);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.runner-score-value {
+  font-size: 1.25rem;
+  color: var(--ink);
+  font-family: "Consolas", monospace;
+  font-weight: 700;
+}
+
+.runner-highscore-value {
+  font-size: 1.25rem;
+  color: var(--accent-orange);
+  font-family: "Consolas", monospace;
+  font-weight: 700;
+}
+
+.runner-sound-btn {
+  background: var(--accent-violet-soft);
+  border: 1px solid var(--mist);
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.runner-sound-btn:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+}
+
+.runner-canvas-container {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1.5px solid var(--mist);
+  cursor: pointer;
+  background: var(--bg-page);
+  position: relative;
+  touch-action: manipulation;
+}
+
+.runner-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.runner-footer-hints {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--slate);
+}
+
+.runner-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.runner-restart-btn {
+  margin-left: auto;
+  font-size: 0.75rem;
+  padding: 0.35rem 1rem;
+}

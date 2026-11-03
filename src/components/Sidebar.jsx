@@ -99,6 +99,17 @@ export default function Sidebar({ isOpen, cerrarSidebar }) {
                 Sonia
               </Link>
             </li>
+
+            <li className="nav-separator">Extra</li>
+            <li>
+              <Link
+                to="/game"
+                className={`nav-link ${isActive("/game")}`}
+                onClick={cerrarSidebar}
+              >
+                🎮 DataHell Runner
+              </Link>
+            </li>
           </ul>
         </nav>
 

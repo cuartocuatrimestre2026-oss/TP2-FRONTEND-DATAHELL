@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import DataHellRunner from "../components/DataHellRunner";
 
 export default function NotFound() {
   useEffect(() => {
@@ -15,30 +16,31 @@ export default function NotFound() {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        minHeight: "60vh",
-        padding: "2rem",
+        padding: "2rem 1rem 4rem 1rem",
+        minHeight: "70vh",
       }}
     >
       <div
         style={{
-          background: "rgba(26, 24, 25, 0.7)",
-          border: "1px solid var(--accent-orange)",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-color)",
           borderRadius: "var(--radius-lg)",
-          padding: "3.5rem 2rem",
-          maxWidth: "600px",
+          padding: "2.5rem 2rem",
+          maxWidth: "760px",
           width: "100%",
-          boxShadow: "0 15px 40px rgba(0, 0, 0, 0.5)",
+          boxShadow: "var(--shadow-lg)",
+          marginBottom: "2rem",
         }}
       >
         <span
           style={{
             fontSize: "4.5rem",
-            fontWeight: 700,
+            fontWeight: 800,
             fontFamily: "var(--font-heading)",
             color: "var(--accent-orange)",
             lineHeight: 1,
             display: "block",
-            marginBottom: "1rem",
+            marginBottom: "0.5rem",
           }}
         >
           404
@@ -48,8 +50,8 @@ export default function NotFound() {
             fontFamily: "var(--font-heading)",
             fontSize: "2rem",
             color: "var(--ink)",
-            marginBottom: "1rem",
-            fontWeight: 400,
+            marginBottom: "0.8rem",
+            fontWeight: 500,
           }}
         >
           Ruta no encontrada
@@ -59,15 +61,34 @@ export default function NotFound() {
             color: "var(--slate)",
             fontSize: "1.05rem",
             lineHeight: 1.6,
-            marginBottom: "2rem",
+            maxWidth: "580px",
+            margin: "0 auto 1.5rem auto",
           }}
         >
-          Parece que te has desviado en las profundidades de DataHell. La sección
-          o recurso que buscas no existe o fue reubicada.
+          Parece que te has desviado en las profundidades del código. Mientras
+          recalculamos el despliegue... <strong>¿te sobró tiempo?</strong> Probá el
+          clásico juego offline, ¡pero con conexión y esquivando bugs de DataHell!
         </p>
-        <Link to="/" className="btn btn-primary" style={{ padding: "0.8rem 1.8rem" }}>
-          Volver a la Portada
-        </Link>
+
+        {/* Minijuego embebido */}
+        <DataHellRunner />
+
+        <div
+          style={{
+            marginTop: "2rem",
+            display: "flex",
+            justifyContent: "center",
+            gap: "1rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <Link to="/" className="btn btn-primary" style={{ padding: "0.8rem 1.8rem" }}>
+            🡸 Volver a la Portada
+          </Link>
+          <Link to="/game" className="btn btn-outline" style={{ padding: "0.8rem 1.8rem" }}>
+            🎮 Ver Arcade Completo
+          </Link>
+        </div>
       </div>
     </main>
   );

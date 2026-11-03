@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Portada from "./pages/Portada";
 import Bitacora from "./pages/Bitacora";
 import Perfil from "./pages/Perfil";
@@ -10,6 +10,7 @@ import BotonSubir from "./components/BotonSubir";
 import "./css/global.css";
 import Tecnologias from "./pages/Tecnologias";
 import ArbolRenderizado from "./pages/ArbolRenderizado";
+import ArcadeGame from "./pages/ArcadeGame";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -17,11 +18,24 @@ function App() {
   const toggleSidebar = () => setSidebarAbierto(!sidebarAbierto);
   const cerrarSidebar = () => setSidebarAbierto(false);
 
+  const [tema, setTema] = useState(() => {
+    return localStorage.getItem("datahell-theme") || "dark";
+  });
+
+  const toggleTema = () => {
+    setTema((prev) => (prev === "dark" ? "light" : "dark"));
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", tema);
+    localStorage.setItem("datahell-theme", tema);
+  }, [tema]);
+
   return (
     <BrowserRouter>
       <ScrollToTop />
 
-      <Header toggleSidebar={toggleSidebar} isOpen={sidebarAbierto} />
+      <Header toggleSidebar={toggleSidebar} isOpen={sidebarAbierto} tema={tema} toggleTema={toggleTema} />
 
       <div
         style={{
@@ -47,6 +61,7 @@ function App() {
             <Route path="/perfil/:id" element={<Perfil />} />
             <Route path="/stack" element={<Tecnologias />} />
             <Route path="/arbol" element={<ArbolRenderizado />} />
+            <Route path="/game" element={<ArcadeGame />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 
@@ -55,6 +70,11 @@ function App() {
               © 2026 Equipo DataHell <br />
               Trabajo Práctico Grupal 2 : Desarrollado en React.
             </p>
+            <div style={{ marginTop: "0.85rem" }}>
+              <Link to="/game" className="footer-game-pill">
+                🎮 ¿Te sobró tiempo? Jugá al DataHell Runner
+              </Link>
+            </div>
           </footer>
         </div>
       </div>

@@ -33,7 +33,7 @@
 .arbol-container {
   max-width: 950px;
   margin: 0 auto 4rem auto;
-  background: rgba(26, 24, 25, 0.6);
+  background: var(--card-glass);
   border: 1px solid var(--mist);
   border-radius: var(--radius-lg);
   padding: 2.5rem 2rem;
@@ -57,7 +57,7 @@
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  background: rgba(15, 13, 14, 0.75);
+  background: var(--bg-card);
   border: 1px solid var(--mist);
   border-left: 3px solid var(--accent-orange);
   border-radius: var(--radius-md);
@@ -68,7 +68,7 @@
 
 .tree-card:hover {
   border-color: rgba(198, 73, 15, 0.5);
-  background: rgba(20, 18, 19, 0.95);
+  background: var(--card-bg-elevated);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -127,7 +127,7 @@
 
 .tree-type-badge.route {
   background: rgba(198, 73, 15, 0.15);
-  color: #eb8d62;
+  color: var(--accent-orange);
   border-color: rgba(198, 73, 15, 0.35);
 }
 
@@ -146,7 +146,7 @@
   gap: 1.5rem;
   flex-wrap: wrap;
   font-size: 0.82rem;
-  color: #c2d0df;
+  color: var(--slate);
 }
 
 .tree-children {
@@ -167,4 +167,72 @@
   .tree-card {
     padding: 0.85rem;
   }
+}
+
+
+.tree-details code {
+  color: var(--ink);
+  background: var(--bg-page);
+  border: 1px solid var(--mist);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.88em;
+}
+
+
+/* === BUSCADOR DEL ÁRBOL Y RESALTADO === */
+.arbol-search-wrapper {
+  position: relative;
+  max-width: 580px;
+  margin: 0 auto 1.8rem auto;
+}
+
+.arbol-search-input {
+  width: 100%;
+  padding: 0.85rem 2.8rem 0.85rem 1.4rem;
+  background: var(--bg-card);
+  border: 1.5px solid var(--mist);
+  border-radius: var(--radius-full);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.arbol-search-input:focus {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 0 3px rgba(198, 73, 15, 0.2);
+}
+
+.arbol-search-clear {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--slate);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.arbol-search-clear:hover {
+  color: var(--accent-orange);
+}
+
+.tree-card-match {
+  border-color: var(--accent-orange) !important;
+  background: rgba(198, 73, 15, 0.12) !important;
+  box-shadow: 0 6px 20px rgba(198, 73, 15, 0.3) !important;
+  transform: translateX(4px);
+}
+
+.highlight-text {
+  color: var(--accent-orange) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(198, 73, 15, 0.4);
 }

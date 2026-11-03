@@ -22,7 +22,6 @@ export default function Bitacora() {
 
   const [filtroActivo, setFiltroActivo] = useState("all");
   const [isSticky, setIsSticky] = useState(false);
-  const [modalArbolAbierto, setModalArbolAbierto] = useState(false);
 
   const tarjetasRef = useRef([]);
   const heroRef = useRef(null);
@@ -151,9 +150,10 @@ export default function Bitacora() {
               >
                 Git & Publicación
               </button>
-              <button
-                className="btn btn-outline bitacora-filter-btn tree-btn"
-                onClick={() => setModalArbolAbierto(true)}
+              <Link
+                to="/arbol"
+                className="btn btn-outline bitacora-filter-btn"
+                aria-label="Ir a la sección interactiva del Árbol de Renderizado"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -172,7 +172,7 @@ export default function Bitacora() {
                   <path d="M18 9a9 9 0 0 1-9 9"></path>
                 </svg>
                 Árbol de Renderizado
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -227,59 +227,6 @@ export default function Bitacora() {
         </div>
       </section>
 
-      {modalArbolAbierto && (
-        <div
-          className="modal-overlay"
-          onClick={() => setModalArbolAbierto(false)}
-        >
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="modal-close"
-              onClick={() => setModalArbolAbierto(false)}
-            >
-              &times;
-            </button>
-
-            <h3 className="modal-title">Árbol de Renderizado</h3>
-            <p className="modal-desc">
-              Jerarquía de componentes de nuestra Single Page Application.
-            </p>
-
-            <div className="tree-code-block">
-              <pre>
-                {`<App>
-  │
-  ├─ <ScrollToTop />
-  ├─ <Header />
-  │
-  ├─ <Contenedor Flex>
-  │    ├─ <Sidebar />
-  │    │
-  │    └─ <Routes>
-  │         ├─ <Portada />
-  │         ├─ <Bitacora />
-  │         ├─ <Tecnologias />
-  │         ├─ <Perfil />
-  │         ├─ <ArbolRenderizado />
-  │         └─ <NotFound />
-  │
-  ├─ <Footer />
-  └─ <BotonSubir />`}
-              </pre>
-            </div>
-
-            <div style={{ marginTop: "1.5rem", textAlign: "center" }}>
-              <Link
-                to="/arbol"
-                className="btn btn-primary"
-                onClick={() => setModalArbolAbierto(false)}
-              >
-                Explorar Árbol Interactivo Completo 🡺
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
     </main>
   );
 }

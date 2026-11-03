@@ -34,6 +34,16 @@ export default function Portada() {
     '"Haz clic en el botón para descubrir nuestras frases preferidas."',
   );
   const [fraseAnimando, setFraseAnimando] = useState(false);
+  const [areaFiltro, setAreaFiltro] = useState("all");
+
+  const miembrosFiltrados = equipoData.filter((m) => {
+    if (areaFiltro === "all") return true;
+    if (areaFiltro === "frontend") return m.id === "mariela" || m.id === "sonia";
+    if (areaFiltro === "backend") return m.id === "sergio" || m.id === "johana";
+    if (areaFiltro === "ux") return m.id === "mariela" || m.id === "miguel";
+    if (areaFiltro === "qa") return m.id === "johana" || m.id === "miguel";
+    return true;
+  });
   const indicesUsados = useRef([]);
 
   const generarFrase = () => {
@@ -285,8 +295,46 @@ export default function Portada() {
           DataHell.
         </p>
 
+        <div className="member-filter-bar">
+          <button
+            type="button"
+            className={`btn ${areaFiltro === "all" ? "btn-primary" : "btn-outline"} member-filter-pill`}
+            onClick={() => setAreaFiltro("all")}
+          >
+            Todos ({equipoData.length})
+          </button>
+          <button
+            type="button"
+            className={`btn ${areaFiltro === "frontend" ? "btn-primary" : "btn-outline"} member-filter-pill`}
+            onClick={() => setAreaFiltro("frontend")}
+          >
+            Frontend & UI
+          </button>
+          <button
+            type="button"
+            className={`btn ${areaFiltro === "backend" ? "btn-primary" : "btn-outline"} member-filter-pill`}
+            onClick={() => setAreaFiltro("backend")}
+          >
+            Backend & Datos
+          </button>
+          <button
+            type="button"
+            className={`btn ${areaFiltro === "ux" ? "btn-primary" : "btn-outline"} member-filter-pill`}
+            onClick={() => setAreaFiltro("ux")}
+          >
+            Diseño & Creatividad
+          </button>
+          <button
+            type="button"
+            className={`btn ${areaFiltro === "qa" ? "btn-primary" : "btn-outline"} member-filter-pill`}
+            onClick={() => setAreaFiltro("qa")}
+          >
+            QA & DevOps
+          </button>
+        </div>
+
         <div className="members-grid">
-          {equipoData.map((miembro) => (
+          {miembrosFiltrados.map((miembro) => (
             <MemberCard key={miembro.id} miembro={miembro} />
           ))}
         </div>

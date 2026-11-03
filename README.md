@@ -104,28 +104,42 @@ A continuación se presentan capturas del funcionamiento de los componentes y vi
 
 ---
 
-## 7. Funcionalidades Principales y Criterios de Evaluación
+## 7. Funcionalidades Principales y Cumplimiento de Criterios (Nivel SUPERA)
 
-1. **Abstracción de Datos (JSON) y Componentización mediante Props (Criterios 04 y 10):**
-   * Los datos personales de los integrantes se extrajeron al módulo `equipo.js`.
-   * En la Portada, la renderización de las personas se modularizó en el componente reutilizable `<MemberCard />`, pasando la información de cada integrante a través de *props* dedicadas.
-   * El catálogo tecnológico se gestiona desde `tecnologias_data.json` con **21 registros estructurados** (100% software, cubriendo Frontend, Backend, Mobile, Bases de Datos, QA & Testing y DevOps). Cada tarjeta cuenta con un acordeón interactivo que permite desplegar u ocultar información adicional (versión, licencia y uso en el proyecto), con cierre inteligente al hacer clic fuera o presionar la tecla `Escape`.
-2. **Arquitectura de Navegación Dual y Completa (Criterios 05 y 06):**
-   * Navegación compartida mediante `<Header>` fijo y `<Sidebar>` retráctil adaptada a dispositivos móviles con panel *off-canvas*.
-   * Todas las pantallas disponen de controles internos de navegación (`Volver al Inicio`, anterior/siguiente) sin depender del botón Atrás del navegador.
-   * La vista 404 (`<NotFound />`) captura cualquier ruta huérfana y orienta al usuario hacia la portada.
-3. **Catálogo Tecnológico con Búsqueda y Filtros Combinados (Criterio 11):**
-   * En la vista `/stack`, se aplica un filtrado dual reactivo (caja de búsqueda por texto + `<select>` de categorías) que opera en tiempo real.
-   * Incluye estado de lista vacía (*empty state*) con mensaje explicativo y botón para reiniciar todos los filtros.
-4. **Consumo de API Pública con Gestión Completa de Estados (Criterio 12):**
-   * En `<Perfil />`, se consulta la API pública de GitHub (`api.github.com/users/{username}/repos`).
-   * Posee indicador visual de carga (`cargandoRepos`), manejo de errores (`errorRepos`), botón en la interfaz para **Actualizar** en caliente y botón para **Reintentar conexión** ante contingencias.
-5. **Árbol de Renderizado Interactivo (Criterio 13):**
-   * Sección accesible desde la navegación (`/arbol`) que renderiza la jerarquía completa de componentes React.
-   * Cada nodo principal permite **expandir y contraer** sus ramas hijas mediante controles interactivos `[+] / [-]` y botones globales para explorar la arquitectura de software.
-6. **Bitácora de Desarrollo con Filtros Funcionales (Criterio 14):**
-   * Registros cronológicos de decisiones, acuerdos y dificultades técnicas consumidos desde `bitacora.json`.
-   * Botonera organizada en dos renglones con filtros reactivos por categoría y mecanismo de *Scroll-Spy* implementado con hooks (`useRef` y `useEffect`).
+Nuestra aplicación implementa los 15 criterios de evaluación en sus niveles más altos (**Propone** y **Supera**), integrando microinteracciones, persistencia en `localStorage` y recursos multimedia reales:
+
+1. **Gestión de Repositorio y Publicación (Criterio 01 - Propone):** Repositorio público e independiente con descripción del proyecto y acceso directo al despliegue en Vercel.
+2. **README Técnico Integral (Criterio 02 - Propone):** Documentación exhaustiva con índice de navegación interno, descripción del proyecto, integrantes, capturas de pantalla y guía técnica.
+3. **Integrantes y Responsabilidades (Criterio 03 - Propone):** Identificación precisa de roles, especialidades y tareas técnicas de cada miembro del equipo.
+4. **Arquitectura React & Componentización mediante Props (Criterio 04 - Propone):** Modularización en componentes reutilizables (`<MemberCard />`, `<NodoComponente />`, `<Header />`, `<Sidebar />`) parametrizados mediante *props* y renderizados a partir de datos estructurados.
+5. **Sidebar Compartida & Accesible (Criterio 05 - Propone):** Menú lateral *off-canvas* compartido entre todas las vistas con detección de ruta activa (`useLocation`), soporte para teclado (`Escape`) y cierre táctil en móviles.
+6. **Navegación Fluida & Resiliencia (Criterio 06 - Propone):** Todas las pantallas ofrecen navegación interna (`Volver al Inicio`, anterior/siguiente) sin depender del botón Atrás. Configuración de `vercel.json` con *rewrites* para recarga directa de cualquier URL sin error 404.
+7. **Portada Interactiva con Filtro por Especialidades (Criterio 07 - Propone):** Presentación del equipo con contadores dinámicos animados (`requestAnimationFrame`), generador de frases y **barra interactiva de filtrado de integrantes por área** (`Frontend & UI`, `Backend & Datos`, `Diseño & Creatividad`, `QA & DevOps`).
+8. **Perfiles Dinámicos con Reproductor de Audio Real (Criterio 08 - Supera):**
+   * **Reproductor multimedia de audio real:** Al seleccionar un disco favorito de un integrante, la aplicación reproduce una **muestra sonora oficial de 30 segundos (AAC/m4a)** con carátula oficial del álbum, botón interactivo Play/Pause, barra de progreso y ecualizador animado de ondas de sonido.
+   * **Compartir perfil:** Botón para copiar el enlace directo al portapapeles (`navigator.clipboard`) con notificación Toast animada.
+   * **Navegación rápida de equipo:** Barra circular con los avatares de los 5 integrantes para saltar directamente a cualquier compañero sin salir del perfil.
+   * **Reseñas desplegables:** Apertura y cierre de sinopsis cinematográficas y críticas musicales.
+9. **Identidad Visual Integral & Modo Claro / Modo Oscuro (Criterio 09 - SUPERA):**
+   * **Tema Dual Dinámico (Dark / Light):** Selector accesible en la cabecera fija que alterna entre la estética *tech-noir* original (`#0f0d0e`) y una paleta *editorial paper* cálida (`#f6f3ef`), con persistencia en `localStorage` (`datahell-theme`) y transición suave de CSS Variables.
+   * **Iconografía SVG y tipografía:** Combinación armónica de fuentes de Google Fonts (*Cormorant Garamond* e *Inter*) e íconos interactivos de `lucide-react`.
+10. **Datos Locales JSON Parametrizados (Criterio 10 - Propone):** Catálogo estructurado en `tecnologias_data.json` con **21 registros** de software organizados por categoría, con acordeón interactivo que despliega detalles técnicos (versión, licencia y uso).
+11. **Búsqueda, Filtro, Favoritos y Ordenamiento (Criterio 11 - Supera):**
+    * Búsqueda reactiva por texto libre en tiempo real.
+    * Selector de categorías con actualización instantánea.
+    * **Sistema de Favoritos persistente (`localStorage`):** Posibilidad de marcar herramientas con estrella (`★`) y filtrar por *Solo Favoritas*.
+    * **Selector de ordenamiento:** Ordenar por `Nombre (A → Z)`, `Nombre (Z → A)` o `Por Categoría`.
+    * **Contador dinámico:** Muestra cantidad exacta de resultados filtrados y estado de lista vacía (*empty state*) con botón para restablecer filtros.
+12. **Consumo de API Pública con Resiliencia (Criterio 12 - Propone):** Integración con la API pública de GitHub (`api.github.com/users/{username}/repos`) en la vista de perfil, con estados visuales de carga, manejo explícito de errores y botones para **Actualizar** o **Reintentar conexión** en caliente.
+13. **Árbol de Renderizado con Buscador en Vivo (Criterio 13 - Propone):** Vista `/arbol` interactiva que expone la jerarquía completa del Virtual DOM, con botones para expandir/colapsar ramas y **buscador en tiempo real** que resalta componentes, props y estados coincidentes.
+14. **Bitácora de Desarrollo con Scroll-Spy y Filtros (Criterio 14 - Propone):** Línea de tiempo cronológica con filtros por categoría (`Decisiones`, `Dificultades`, `Git`) y detección de scroll para resaltar la entrada en foco.
+15. **Declaración Analítica de Uso de IA (Criterio 15 - Propone):** Matriz detallada que discrimina por cada integrante las aplicaciones (Antigravity IDE, Gemini Web), modelos (Gemini 1.5/2.5 Pro, Claude 3.5 Sonnet) y tareas técnicas asistidas.
+16. **Creatividad & Gamificación Interactiva (Nivel SUPERA - DataHell Runner):** Minijuego arcade desarrollado desde cero en HTML5 `<canvas>`, accesible en la ruta `/game`, en el menú de navegación y embebido en la página `404`. Rinde homenaje al clásico dino runner offline de Chrome bajo la premisa: *'¿Te sobró tiempo entre despliegues? El clásico juego de cuando te quedás sin internet... pero con internet y esquivando bugs de DataHell'*. Cuenta con:
+    * Física fluida de saltos y colisiones pixel-perfect.
+    * Generación procedural de obstáculos (bugs de código, fallas de base de datos y servidores caídos).
+    * Efectos de sonido retro 8-bit sintetizados en tiempo real mediante la **Web Audio API** nativa (0 dependencias externas).
+    * Sistema de partículas y efectos visuales adaptados a modo claro y modo oscuro.
+    * Puntuación en tiempo real y persistencia del récord de puntaje (*High Score*) en `localStorage`.
 
 ---
 

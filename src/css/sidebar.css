@@ -4,7 +4,9 @@
   position: fixed;
   top: 70px;
   left: 0;
-  background: rgba(15, 13, 14, 0.98);
+  background: var(--sidebar-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-right: 1px solid var(--mist);
   display: flex;
   flex-direction: column;

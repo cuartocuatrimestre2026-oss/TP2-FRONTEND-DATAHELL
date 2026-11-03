@@ -147,17 +147,7 @@ html.page-bitacora {
   transition: all 0.3s ease;
 }
 
-.tree-btn {
-  padding: 0.3rem 0.8rem;
-  font-size: 0.65rem;
-  opacity: 0.7;
-  border-color: transparent;
-}
 
-.tree-btn:hover {
-  opacity: 1;
-  border-color: var(--accent-orange);
-}
 
 .sticky-hero .tree-btn-wrapper {
   display: none;
@@ -177,7 +167,7 @@ html.page-bitacora {
 }
 
 .modal-content {
-  background: #1a1819;
+  background: var(--bg-card);
   border: 1px solid var(--accent-orange);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
@@ -217,7 +207,7 @@ html.page-bitacora {
 }
 
 .tree-code-block {
-  background: #0f0d0e;
+  background: var(--bg-page);
   border: 1px solid var(--mist);
   border-left: 3px solid var(--accent-orange);
   border-radius: var(--radius-sm);
@@ -229,7 +219,7 @@ html.page-bitacora {
 .tree-code-block pre {
   font-family: "Consolas", "Monaco", monospace;
   font-size: 0.85rem;
-  color: #c2d0df;
+  color: var(--ink);
   line-height: 1.6;
   margin: 0;
 }
@@ -247,4 +237,34 @@ html.page-bitacora {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.75rem;
+}
+
+
+/* Sincronización perfecta de hover para todos los botones de filtro y el botón de enlace Árbol */
+.bitacora-filter-btn {
+  opacity: 1 !important;
+}
+
+.bitacora-filter-btn svg {
+  stroke: currentColor;
+  transition: stroke 0.25s ease;
+}
+
+.bitacora-filter-btn:hover,
+.bitacora-filter-btn:focus,
+a.bitacora-filter-btn:hover,
+a.bitacora-filter-btn:focus {
+  opacity: 1 !important;
+  color: var(--accent-orange) !important;
+  border-color: var(--accent-orange) !important;
+  background: rgba(198, 73, 15, 0.12) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(198, 73, 15, 0.35);
+}
+
+.bitacora-filter-btn:hover svg,
+.bitacora-filter-btn:focus svg,
+a.bitacora-filter-btn:hover svg,
+a.bitacora-filter-btn:focus svg {
+  stroke: var(--accent-orange) !important;
 }
